@@ -1,0 +1,44 @@
+@font-face{
+    font-family: 'Raleway', sans-serif;
+}
+*{
+    font-family: 'Raleway', sans-serif;
+    margin:0;
+    padding: 0;
+}
+.messageDiv{
+    margin: 0 auto;
+    margin-top:25px;
+    border: solid 1px black;
+    overflow: auto;
+    height: 50vh;
+    width: 35%;
+    border-radius:10px;
+}
+.group {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 25px;
+    justify-content: center;
+}
+.pseudoUtil{
+    display: flex;
+    top:0;
+    left: 0;
+    height: 10vh;
+    width: 100%;
+    margin:0;
+    margin-bottom: 25px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgba(48, 63, 159, 0.5);
+}
+
+.listeUtil{
+    position: absolute;
+    top:0;
+    left:0;
+    line-height:normal;
+}
