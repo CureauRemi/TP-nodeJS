@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Projet Mongo - Pascal App</title>
+        <link rel="icon" href="https://cdn.shopify.com/s/files/1/0010/9215/7503/t/10/assets/cbt2/images/result-clipboard.png?12843900129056141544">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+        crossorigin="anonymous">
+        <style type="text/css">
+        .espace{
+            padding: 3vh;
+        }
+        .box-terminal{
+            border: 1px solid black;
+            height: 150px;
+            overflow: scroll;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1 class="display-4">TP - Pascal MongoDB</h1>
+            <p class="lead">Voici le projet MongoDB qui va simuler la connexion avec une base de données en NoSQL</p>
+        </div>
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="create-tab" data-toggle="tab" href="#create" role="tab" aria-controls="create" aria-selected="true">Create</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="read-tab" data-toggle="tab" href="#read" role="tab" aria-controls="read" aria-selected="false">Read</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update" aria-selected="false">Update</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="delete" aria-selected="false">Delete</a>
+                  </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+
+                <div class="tab-pane fade show active" id="create"    role="tabpanel" aria-labelledby="create-tab">
+                    <div class="espace">
+                        <h3>Create a movie</h3>
+                    </div>
+                    <form action="/create" method="POST">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Name</span>
+                            </div>
+                            <input type="text" class="form-control" id="NameMovie" placeholder="Type anything .." aria-label="Create" aria-describedby="basic" name="NameMovie">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputCountry">Country</label>
+                            <select id="inputCountry" class="form-control" name="inputCountry">
+                              <option selected>Choose...</option>
+                              <option value="fr">fr</option>
+                              <option value="en">en</option>
+                              <option value="us">us</option>
+                              <option value="ch">ch</option>
+                              <option value="jp">jp</option>
+                              <option value="de">de</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputVote">Vote</label>
+                            <select id="inputVote" class="form-control" name="inputVote">
+                              <option selected>Choose...</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success" id="Buttoncreate">Create</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade"             id="read" role="tabpanel" aria-labelledby="read-tab">
+                    
+                    <div class="espace">
+                        <h3>Read movies</h3>
+                    </div>
+                    <div id='moviesRead' class="box-terminal"></div>
+                </div>
+                <div class="tab-pane fade"             id="update" role="tabpanel" aria-labelledby="update-tab">
+                    <div class="espace">
+                        <h3>Update a movie</h3>
+                    </div>
+                    <form action="/update" method="POST">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Name</span>
+                            </div>
+                            <input type="text" class="form-control"id="UpdateNameMovie" placeholder="Type anything .." aria-label="Create" aria-describedby="basic">
+                        </div>
+                        <button type="submit" class="btn btn-warning" id="Buttonupdate">Update</button> 
+                    </form> 
+                </div>
+                <div class="tab-pane fade"             id="delete" role="tabpanel" aria-labelledby="delete-tab">
+                    <div class="espace">
+                        <h3>Delete a movie</h3>
+                    </div>
+                    <form action="/delete" method="POST">
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Name</label>
+                            <select id="inputName" class="form-control">
+                              <option selected>Choose...</option>
+                              <option>True</option>
+                              <option>False</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-danger" id="Buttondelete">Delete</button> 
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="stat" id='stat'>
+
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</html>

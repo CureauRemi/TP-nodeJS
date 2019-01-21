@@ -1,31 +1,21 @@
-/*ecrir Ecrire une api express :
-sauvegarde des données dans  un fichier json a chaque modification
-authentification (si tout le reste est fait)
-*/
 const app = require('express')()
-const userRouter = require('./user')
-const itemsRouter = require('./items')
-const listRouter = require('./list')
+const moviesRouter = require('./movies')
 const fs = require('fs')
 const bodyParser = require('body-parser')
 
-app.use(bodyParser.json())
-app.use('/user', userRouter)
-app.use('/items', itemsRouter)
-app.use('/list', listRouter)
+//--------------------------------------------------------
+// Connexion a mongoDB
+//--------------------------------------------------------
 
-app.get('/', (req, res) =>{
-
-    res.end("hello world !")
-})
-app.listen(3000, () =>{
-    console.log('App listening on port 3000')
-})
-/*
-function loggerMiddleware(req, res, next) {
-    console.log(`New request received :
-   <== [${req.method}] ${req.originalUrl}`)
-    next()
-   }
-
-*/
+const mongoDbClient = require('./mongo.connector')
+mongoDbClient.init()
+    .then(client =>{
+        app.use(bodyParser.json())
+        app.use('/movies', moviesRouter)
+        app.get('/', (req, res) =>{
+            res.sendFile(__dirname + "/views/index.html" )
+        })
+        app.listen(4600, () =>{
+            console.log('App listening on port 4600')
+        })        
+    }).catch(err => { throw err})
